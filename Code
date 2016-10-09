@@ -1,0 +1,44 @@
+###     Simple Tip Calculator       ###
+'''
+Notes:
+
+simple tip calculator
+use -
+user enters bill amount and receives a tip amount based on tip percentage
+
+
+'''
+
+def Calculator(billAmount, tipPercent):
+
+    tipAmount = float(billAmount) * float(tipPercent)
+    
+    total = float(billAmount) + float(tipAmount)
+    print("Please add ${0}".format(tipAmount) + " for a total of ${0}" .format(total))
+
+def Tip(rating):
+    tipPercent = float(0)
+    
+    if rating == "1":
+        tipPercent = round(float(10), 2) * float(0.01)
+    if rating == "2":
+        tipPercent = round(float(13), 2) * float(0.01)
+    if rating == "3":
+        tipPercent = round(float(15), 2) * float(0.01)
+    if rating == "4":
+        tipPercent = round(float(16), 2) * float(0.01)
+    if rating == "5":
+        tipPercent = round(float(19), 2) * float(0.01)
+    return tipPercent
+
+###========================================================================###
+
+billAmount = input("What is your bill? ")
+rating = input("How would you rate your server 1 to 5? ")
+
+Tip(rating)
+tipPercent = Tip(rating)
+proceed = input("You will tip " + str(int(float(tipPercent * 100))) + "%. Is that okay? ")
+
+if proceed == "yes":
+    Calculator(billAmount,tipPercent)
