@@ -1,5 +1,7 @@
-###     Simple Tip Calculator       ###
 '''
+
+Simple Tip Calculator
+
 Notes:
 
 simple tip calculator
@@ -7,36 +9,60 @@ use -
 user enters bill amount and receives a tip amount based on tip percentage
 
 problems:
-No option does not determine a new tip amount after rerating the server. -  CONQUERED!
+No option does not determine a new tip amount after re-rating the server. -  CONQUERED!
 
 '''
+
+
 import sys
 
 
-def Payment(tipCalculated):                                                                                             #The main function
-    if tipCalculated == False:                                                                                          #Check to see if the tip has been calculated using var tipCalculated
-        billAmount = input("What is your bill? ")                                                                       #asks for the bill amount
-        rating = input("How would you rate your server 1 to 5? ")                                                       #asks for a rating, later used to determine the tipPercent
+''' Function Payment
+#The main function
+#Check to see if the tip has been calculated using var tipCalculated
+#asks for the bill amount
+#asks for a rating, later used to determine the tipPercent
+#runs the Tip function using the entered rating
+#the function returns a tipPercent
+#as long as tipCalculated is False
+#Asks for confirmation that the tip is okay.
+#If yes, runs the Calculator function using the entered values and produces the tip + total bill
+#Returns tipCalculated as True, ending the application.
+#If no, user will be asked to re-rate their server
+#This will continue until the user is satsified with the tip and accepts, enters Yes
+'''
 
-        Tip(rating)                                                                                                     #runs the Tip function using the entered rating
-        tipPercent = Tip(rating)                                                                                        #the function returns a tipPercent
 
-        while tipCalculated == False:                                                                                   #as long as tipCalculated is False
-            tipOK = str(input("You will tip " + str(int(float(tipPercent * 100))) + "%. Is that okay? "))               #Asks for confirmation that the tip is okay.
-            if tipOK == str("yes") or tipOK == str("y"):                                                                #If yes, runs the Calculator function using the entered values and produces the tip + total bill
+def Payment(tipCalculated):
+    if tipCalculated is False:
+        billAmount = input("What is your bill? ")
+        rating = input("How would you rate your server 1 to 5? ")
+
+        Tip(rating)
+        tipPercent = Tip(rating)
+
+        while tipCalculated is False:
+            tipOK = str(input("You will tip " + str(int(float(tipPercent * 100))) + "%. Is that okay? "))
+            if tipOK == str("yes") or tipOK == str("y"):
                 Calculator(billAmount,tipPercent)
-                tipCalculated = True                                                                                    #Returns tipCalculated as True, ending the application.
-            if tipOK == str("no") or  tipOK == str("n"):                                                                #If no, user will be asked to re-rate their server
-                rating = input("How would you rate your server 1 to 5? ")                                               #This will continue until the user is satsified with the tip and accepts, enters Yes
+                tipCalculated = True
+                break
+            if tipOK == str("no") or  tipOK == str("n"):
+                rating = input("How would you rate your server 1 to 5? ")
                 Tip(rating)
                 tipPercent = Tip(rating)
                 tipCalculated = False
-    return tipCalculated
+
+''' Function Calculator
+#Calculator figures out the tip amount
+#and the informing how much the tip is
+#and what the overall total is.
+'''
 
 
-def Calculator(billAmount, tipPercent):                                                                                 #Calculator figuring out the tip amount
-                                                                                                                        #and the informing how much the tip is
-    tipAmount = float(billAmount) * float(tipPercent)                                                                   #and what the overall total is.
+def Calculator(billAmount, tipPercent):
+
+    tipAmount = float(billAmount) * float(tipPercent)
     
     total = float(billAmount) + float(tipAmount)
     print("Please add ${0}".format(tipAmount) + " for a total of ${0}".format(total))
@@ -44,11 +70,16 @@ def Calculator(billAmount, tipPercent):                                         
     tipCalculated = True
     return tipCalculated
 
+''' Function Tip
+#This is rating. Rating is translated into a
+#tipPercent that is used to calculate the
+#over all tip amount.
+'''
 
 
-def Tip(rating):                                                                                                        #This is rating. Rating is translated into a
-    tipPercent = float(0)                                                                                               #tipPercent that is used to calculate the
-                                                                                                                        #over all tip amount.
+def Tip(rating):
+    tipPercent = float(0)
+
     if rating == "1":
         tipPercent = round(float(10), 2) * float(0.01)
     if rating == "2":
@@ -62,12 +93,14 @@ def Tip(rating):                                                                
     return tipPercent
 
 ###========================================================================###
+'''
+#Creates var tipCalculated and sets to False
+#Whenever tipCalculated is False
+#Run Payment function, checking for tipCalculated to be False
+#Checks for tipCalculated to be True
+'''
 
-tipCalculated = False                                                                                                   #Creates var tipCalculated and sets to False
-while tipCalculated == False:                                                                                           #Whenever tipCalculated is False
-    Payment(tipCalculated)                                                                                              #Run Payment function, checking for tipCalculated to be False
-    if tipCalculated == True:                                                                                           #Checks for tipCalculated to be True
-        print("Thank you.")                                                                                             #Prints a goodbye message
-        break                                                                                                           #ends the loop and program
-    else:                                                                                                               #if anything else
-        break                                                                                                           #
+
+tipCalculated = False
+if tipCalculated is False:
+    Payment(tipCalculated)
