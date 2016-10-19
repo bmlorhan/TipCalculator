@@ -14,9 +14,6 @@ No option does not determine a new tip amount after re-rating the server. -  CON
 '''
 
 
-import sys
-
-
 ''' Function Payment
 #The main function
 #Check to see if the tip has been calculated using var tipCalculated
