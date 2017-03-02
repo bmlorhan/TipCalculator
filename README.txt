@@ -12,4 +12,6 @@ Mar. 1, 2017
 - added ability to split the bill before calculating the total.
 -- asks if you're splitting the bill, requests the number of even splits. Proceeds as normal after.
 
+- fixed slight issue with original bill question not accepting decimals.
+- rounds off at two decimal spots.
 
