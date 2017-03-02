@@ -16,12 +16,12 @@ def tip(r):
 
 def main():
     try:
-        b = int(input("What is your bill? "))
+        b = float(input("What is your bill? "))
         s = input("Are you splitting the bill? ")
         if s == "yes" or s == "y":
             c = int(input("How many times? "))
             b /= c
-        if s == "no" or s == "n":
+        elif s == "no" or s == "n":
             pass
         else:
             pass
