@@ -17,12 +17,20 @@ def tip(r):
 def main():
     try:
         b = int(input("What is your bill? "))
+        s = input("Are you splitting the bill? ")
+        if s == "yes" or s == "y":
+            c = int(input("How many times? "))
+            b /= c
+        if s == "no" or s == "n":
+            pass
+        else:
+            pass
         r = int(input("On a scale of 1 - 5, how would you rate your service? "))
     except ValueError:
         print("Please enter a number")
 
     total = b + (b * tip(r))
 
-    print("Your total bill is " + str(total))
+    print("Your total bill is " + format(total, '.2f'))
 
 main()
