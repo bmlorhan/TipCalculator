@@ -6,9 +6,6 @@
 # bill + tip% = total
 #
 # TODO:
-# Split bill: add feature to allow input of unique and independent bills.
-# example: total bill is 100, A is paying 30 and B is paying 70. Calculate two tip totals separately and include
-#   a complete total. example cont.: A pays 35 and B pays 81 for a total of 116.
 #
 # Inclusion of sales tax. Two ideas: Equally divide sales tax ( default for Equally split bills ). Split sales tax
 #  equally among splits, regardless of what they're paying. IE. A paying 30 contributes to paying tax the same as B
@@ -20,6 +17,9 @@
 #
 # UPDATE:
 # Created function etip to handle Equally split bills.
+#
+# DONE:
+# Split bill: add feature to allow input of unique and independent bills.
 #
 #
 
@@ -50,6 +50,20 @@ def etip(b):
 	print("Each person is responsible for " + format(gbill(b, r), '.2f'))  # outputs information
 
 
+def itip(b, bt):
+	while bt > 0:
+		
+		d = float(input("Enter dish price: "))
+		r = int(input("On a scale of 1 - 5, how would you rate your service? "))
+		bt = bt - d
+		
+		print("This person is responsible for:  " + format(ibill(d, r), '.2f'))  # outputs information
+		
+		if bt <= 0:
+			print("Your grand total is: " + format(ibill(b, r), '.2f'))
+			break
+
+
 def main():
 	try:
 		b = float(input("What is your subtotal? "))  # gets subtotal of Bill.
@@ -63,17 +77,7 @@ def main():
 				
 			elif e == "no" or e == "n":
 				bt = b
-				while bt > 0:
-					
-					d = float(input("Enter dish price: "))
-					r = int(input("On a scale of 1 - 5, how would you rate your service? "))
-					bt = bt - d
-					
-					print("This person is responsible for:  " + format(ibill(d, r), '.2f'))  # outputs information
-					
-					if bt <= 0:
-						print("Your grand total is: " + format(ibill(b, r), '.2f'))
-						break
+				itip(b, bt)
 						
 		elif s == "no" or s == "n":
 			pass
