@@ -25,68 +25,75 @@
 
 
 def tip(r):
-	tr = {1: .1, 2: .13, 3: .15, 4: .17, 5: .2}  #
-	tp = tr[r]  # Tip percentage
-	
-	return tp
+    tr = {1: .1, 2: .13, 3: .15, 4: .17, 5: .2}
+    tp = tr[r]  # Tip percentage
+
+    return tp
 
 
-def gbill(b, r):    # Group bill
-	t = b + (b * tip(r))  # Total after the bill and tip are added together
-	
-	return t
+def gbill(b, r):  # Group bill
+    t = b + (b * tip(r))  # Total after the bill and tip are added together
+
+    return t
 
 
-def ibill(d, r):    # Individual bill
-	t = d + (d * tip(r))  # Total after the dish and tip are added together
-	
-	return t
+def ibill(d, r):  # Individual bill
+    t = d + (d * tip(r))  # Total after the dish and tip are added together
+
+    return t
 
 
-def etip(b):
-	p = int(input("How many people are paying? "))  #
-	b /= p
-	r = int(input("On a scale of 1 - 5, how would you rate your service? "))
-	print("Each person is responsible for " + format(gbill(b, r), '.2f'))  # outputs information
+def etip(b):            # Equally split tip
+    p = int(input("How many people are paying? "))
+    b /= p
+    r = int(input("On a scale of 1 - 5, how would you rate your service? "))
+    print("Each person is responsible for " + format(gbill(b, r), '.2f'))  # outputs information
 
 
-def itip(b, bt):
-	while bt > 0:
-		
-		d = float(input("Enter dish price: "))
-		r = int(input("On a scale of 1 - 5, how would you rate your service? "))
-		bt = bt - d
-		
-		print("This person is responsible for:  " + format(ibill(d, r), '.2f'))  # outputs information
-		
-		if bt <= 0:
-			print("Your grand total is: " + format(ibill(b, r), '.2f'))
-			break
+def itip(b, bt):           # Individual tip
+    charges = []
+    while bt > 0:
 
+        d = float(input("Enter dish price: "))
+        r = int(input("On a scale of 1 - 5, how would you rate your service? "))
+        bt = bt - d
+        charges.append(ibill(d, r))
+
+        if bt < 0:
+            print("Entered amount was greater than " + str(b) + ". Double check and start over.")
+            break
+
+        print("This person is responsible for:  " + format(ibill(d, r), '.2f'))  # outputs information
+
+        if bt == 0:
+            print("Your grand total is: " + format(sum(charges), '.2f'))
+            break
 
 def main():
-	try:
-		b = float(input("What is your subtotal? "))  # gets subtotal of Bill.
-		s = input("Are you splitting the bill? ")    # Split bill?
-		
-		if s == "yes" or s == "y":
-			e = input("Will it be split equally? ")  # Equal split or individual?
-			
-			if e == "yes" or e == "y":
-				etip(b)
-				
-			elif e == "no" or e == "n":
-				bt = b
-				itip(b, bt)
-						
-		elif s == "no" or s == "n":
-			pass
-		
-		else:
-			pass
-	
-	except ValueError:
-		print("Please enter a number")
-	
+    try:
+        b = float(input("What is your bill? "))  # gets subtotal of Bill.
+        s = input("Are you splitting the bill? ")  # Split bill?
+
+        if s == "yes" or s == "y":
+            e = input("Will it be split equally? ")  # Equal split or individual?
+
+            if e == "yes" or e == "y":
+                etip(b)
+
+            elif e == "no" or e == "n":
+                bt = b
+                itip(b, bt)
+
+        if s == "no" or s == "n":
+            bt = b
+            itip(b, bt)
+
+        else:
+            pass
+
+    except ValueError:
+        print("Please enter a number")
+        main()
+
 
 main()
