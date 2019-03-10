@@ -71,9 +71,9 @@ def individualTip(bill, bill_total):           # Individual tip
 
 def main():
     try:
-        bill = float(input("What is your bill? "))  # gets subtotal of Bill.
         split = input("Are you splitting the bill? ")  # Split bill?
-
+        bill = float(input("What is your bill? "))  # User inputs bill total.
+        
         if split == "yes" or split == "y":
             equal = input("Will it be split equally? ")  # Equal split or individual?
 
