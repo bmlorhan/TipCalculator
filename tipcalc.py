@@ -5,22 +5,6 @@
 # User enters the total bill and the tip percentage, calculates the new total
 # bill + tip% = total
 #
-# TODO:
-#
-# Inclusion of sales tax. Two ideas: Equally divide sales tax ( default for Equally split bills ). Split sales tax
-#  equally among splits, regardless of what they're paying. IE. A paying 30 contributes to paying tax the same as B
-#  paying 70. Second idea is to figure out sales tax for that area and add it to all items individually. IE. A and B
-#  will pay 8.5%* ( variable base on location ) of their individual meals. A pays 8.5% of 30, B pays 8.5% of 70. Second
-#  option will need the inclusion of the sales tax from the receipt > more input for user. May or may not be a good
-#  idea. >>> User can choose how they want to handle sales tax on their own.
-# ---------------------------------------------------------------------------------------------------------------
-#
-# UPDATE:
-# Created function etip to handle Equally split bills.
-#
-# DONE:
-# Split bill: add feature to allow input of unique and independent bills.
-#
 #
 
 
@@ -73,7 +57,7 @@ def main():
     try:
         split = input("Are you splitting the bill? ")  # Split bill?
         bill = float(input("What is your bill? "))  # User inputs bill total.
-        
+
         if split == "yes" or split == "y":
             equal = input("Will it be split equally? ")  # Equal split or individual?
 
