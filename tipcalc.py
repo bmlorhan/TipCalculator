@@ -54,33 +54,40 @@ def individualTip(bill, bill_total):           # Individual tip
             break
 
 
-def main():
+def splitBill(split):
     try:
-        split = input("Are you splitting the bill? ")  # Split bill?
-
-        if split == "yes" or split == "y":
+        choices = ["yes", "no"]
+        if split == choices[0]:
             bill = float(input("What is your bill? "))  # User inputs bill total.
             equal = input("Will it be split equally? ")  # Equal split or individual?
 
-            if equal == "yes" or equal == "y":
+            if equal == choices[0]:
                 equalTip(bill)
 
-            elif equal == "no" or equal == "n":
+            elif equal == choices[1]:
                 bill_total = bill
                 individualTip(bill, bill_total)
 
-        if split == "no" or split == "n":
+        if split == choices[1]:
             bill = float(input("What is your bill? "))  # User inputs bill total.
             bill_total = bill
             individualTip(bill, bill_total)
 
-        else:
+        if split != choices[0] and split != choices[1]:
             print("Please enter a (Y)es or (N)o.")
             main()
+        else:
+            quit()
 
     except ValueError:
         print("Please enter a number")
-        main()
+        splitBill(split)
+
+
+def main():
+
+        split = input("Are you splitting the bill? ")  # Split bill?
+        splitBill(split)
 
 
 main()
